@@ -77,7 +77,7 @@
   }
   </script>
 
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300;1,600&family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -93,6 +93,15 @@
       --muted:   #4a5a4a;
       --text-dim: rgba(240,237,232,0.45);
     }
+
+    /* Form status message */
+    #form-status {
+      font-size: .85rem; margin-top: 4px; min-height: 1.2em;
+      color: rgba(8,11,8,.7);
+    }
+    #form-status.success { color: #2a5a0a; font-weight: 400; }
+    #form-status.error   { color: #8a1a0a; font-weight: 400; }
+    #submit-btn:disabled { opacity: .6; cursor: not-allowed; transform: none; }
 
     /* Screen-reader only / SEO context */
     .sr-only {
@@ -527,7 +536,7 @@
 
 <!-- NAV -->
 <nav>
-  <div class="nav-logo">Web<span class="dot">·</span>Bloom</div>
+  <div class="nav-logo"><img src="/images/WebBloom-Logo-notext.png"></div>
   <ul class="nav-links">
     <li><a href="#services">Services</a></li>
     <li><a href="#portfolio">Work</a></li>
@@ -665,30 +674,30 @@
     <p class="portfolio-note reveal">A selection of sites we've designed, built, and launched for our clients.</p>
   </div>
   <div class="portfolio-grid">
-    <div class="portfolio-item reveal">
+    <a href="#" target="_blank" rel="noopener noreferrer" class="portfolio-item reveal">
       <div class="portfolio-item-bg p1"></div>
       <div class="portfolio-item-overlay">
         <div class="portfolio-tag">E-Commerce · Design + Dev</div>
         <div class="portfolio-name">Verdant Goods Co.</div>
       </div>
-      <div class="portfolio-arrow">↗</div>
-    </div>
-    <div class="portfolio-item reveal" style="transition-delay:.1s">
+      <div class="portfolio-arrow" aria-hidden="true">↗</div>
+    </a>
+    <a href="#" target="_blank" rel="noopener noreferrer" class="portfolio-item reveal" style="transition-delay:.1s">
       <div class="portfolio-item-bg p2"></div>
       <div class="portfolio-item-overlay">
         <div class="portfolio-tag">Local Business · Full Build</div>
         <div class="portfolio-name">Maplewood Studio</div>
       </div>
-      <div class="portfolio-arrow">↗</div>
-    </div>
-    <div class="portfolio-item reveal" style="transition-delay:.2s">
+      <div class="portfolio-arrow" aria-hidden="true">↗</div>
+    </a>
+    <a href="#" target="_blank" rel="noopener noreferrer" class="portfolio-item reveal" style="transition-delay:.2s">
       <div class="portfolio-item-bg p3"></div>
       <div class="portfolio-item-overlay">
         <div class="portfolio-tag">Portfolio · Design Only</div>
         <div class="portfolio-name">Celeste Mora Creative</div>
       </div>
-      <div class="portfolio-arrow">↗</div>
-    </div>
+      <div class="portfolio-arrow" aria-hidden="true">↗</div>
+    </a>
   </div>
 </section>
 
@@ -737,7 +746,8 @@
         <label for="message">Tell us about your project</label>
         <textarea id="message" placeholder="Share any details about your vision, timeline, budget, or goals…"></textarea>
       </div>
-      <button class="btn-dark">Send Message →</button>
+      <button class="btn-dark" id="submit-btn" type="button">Send Message →</button>
+      <p id="form-status" aria-live="polite"></p>
     </div>
   </div>
 </section>
@@ -755,6 +765,82 @@
 </footer>
 
 <script>
+  // ─────────────────────────────────────────────
+  // EMAILJS SETUP
+  // 1. Create a free account at https://emailjs.com
+  // 2. Add an Email Service (Gmail, Outlook, etc.) → copy the Service ID
+  // 3. Create an Email Template → copy the Template ID
+  //    In your template use these variables:
+  //      {{from_name}}  {{from_email}}  {{company}}  {{service}}  {{message}}
+  //    Set "To Email" to: info@webbloom.ca
+  // 4. Go to Account → API Keys → copy your Public Key
+  // 5. Replace the three placeholder strings below with your real values
+  // ─────────────────────────────────────────────
+  const EMAILJS_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY';   // ← replace
+  const EMAILJS_SERVICE_ID  = 'YOUR_SERVICE_ID';   // ← replace
+  const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';  // ← replace
+
+  emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+
+  document.getElementById('submit-btn').addEventListener('click', function () {
+    const btn    = this;
+    const status = document.getElementById('form-status');
+
+    const name    = document.getElementById('name').value.trim();
+    const email   = document.getElementById('email').value.trim();
+    const company = document.getElementById('company').value.trim();
+    const service = document.getElementById('service').value;
+    const message = document.getElementById('message').value.trim();
+
+    // Basic validation
+    if (!name || !email || !message) {
+      status.textContent = 'Please fill in your name, email, and message.';
+      status.className = 'error';
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      status.textContent = 'Please enter a valid email address.';
+      status.className = 'error';
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+    status.textContent = '';
+    status.className = '';
+
+    emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+      from_name:  name,
+      from_email: email,
+      company:    company || 'Not provided',
+      service:    service || 'Not selected',
+      message:    message,
+      to_email:   'info@webbloom.ca'
+    })
+    .then(() => {
+      status.textContent = '✓ Message sent! We\'ll be in touch within 24 hours.';
+      status.className = 'success';
+      btn.textContent = 'Sent!';
+      // Clear the form
+      ['name','email','company','message'].forEach(id => document.getElementById(id).value = '');
+      document.getElementById('service').selectedIndex = 0;
+      setTimeout(() => { btn.disabled = false; btn.textContent = 'Send Message →'; }, 4000);
+    })
+    .catch(err => {
+      console.error('EmailJS error:', err);
+      status.textContent = 'Something went wrong. Please try emailing us directly at info@webbloom.ca';
+      status.className = 'error';
+      btn.disabled = false;
+      btn.textContent = 'Send Message →';
+    });
+  });
+
+  // ─────────────────────────────────────────────
+  // PORTFOLIO LINKS
+  // Replace each '#' with the real client site URL when you have them
+  // e.g. href="https://verdantgoods.com"
+  // ─────────────────────────────────────────────
+
   // Cursor
   const cur = document.getElementById('cursor');
   const ring = document.getElementById('cursorRing');
