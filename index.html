@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Web Bloom — Website Design, Development & Hosting</title>
+  <meta name="description" content="Web Bloom builds, designs, and hosts custom websites for businesses. Bold, professional web design tailored to your brand — from first concept to launch and beyond." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.webbloom.ca/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.webbloom.ca/" />
+  <meta property="og:title" content="Web Bloom — Website Design, Development & Hosting" />
+  <meta property="og:description" content="Web Bloom builds, designs, and hosts custom websites for businesses. Bold, professional web design tailored to your brand — from first concept to launch and beyond." />
+  <meta property="og:image" content="https://www.webbloom.ca/og-image.jpg" />
+  <meta property="og:site_name" content="Web Bloom" />
+  <meta property="og:locale" content="en_CA" />
+
+  <!-- Twitter / X Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Web Bloom — Website Design, Development & Hosting" />
+  <meta name="twitter:description" content="Web Bloom builds, designs, and hosts custom websites for businesses. Bold, professional web design tailored to your brand." />
+  <meta name="twitter:image" content="https://www.webbloom.ca/og-image.jpg" />
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Web Bloom",
+    "description": "Web Bloom is a website design, development, and hosting studio helping businesses grow online with custom, professional websites.",
+    "url": "https://www.webbloom.ca",
+    "logo": "https://www.webbloom.ca/logo.png",
+    "image": "https://www.webbloom.ca/og-image.jpg",
+    "telephone": "+1-000-000-0000",
+    "email": "hello@webbloom.ca",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Your City",
+      "addressRegion": "Your Province",
+      "addressCountry": "CA"
+    },
+    "sameAs": [],
+    "priceRange": "$$",
+    "openingHours": "Mo-Fr 09:00-17:00",
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Web Services",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Website Design",
+            "description": "Custom website design built around your brand identity."
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Website Development",
+            "description": "Clean, performant website development for every device."
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Website Hosting & Maintenance",
+            "description": "Reliable hosting with ongoing support, updates, and edits."
+          }
+        }
+      ]
+    }
+  }
+  </script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300;1,600&family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:   #080b08;
+      --deep:    #0e130e;
+      --mid:     #141a14;
+      --white:   #f0ede8;
+      --sage:    #c8e09a;
+      --silk:    #d4c9b8;
+      --bloom:   #a8d47a;
+      --bloom-d: #7aaa50;
+      --muted:   #4a5a4a;
+      --text-dim: rgba(240,237,232,0.45);
+    }
+
+    /* Screen-reader only / SEO context */
+    .sr-only {
+      position: absolute; width: 1px; height: 1px;
+      padding: 0; margin: -1px; overflow: hidden;
+      clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    /* ── CURSOR ── */
+    .cursor {
+      position: fixed; width: 8px; height: 8px;
+      background: var(--sage); border-radius: 50%;
+      pointer-events: none; z-index: 9999;
+      transform: translate(-50%,-50%);
+      transition: width .25s, height .25s;
+    }
+    .cursor-ring {
+      position: fixed; width: 36px; height: 36px;
+      border: 1px solid rgba(200,224,154,0.5); border-radius: 50%;
+      pointer-events: none; z-index: 9998;
+      transform: translate(-50%,-50%);
+      transition: width .3s, height .3s, opacity .3s;
+      opacity: 0.6;
+    }
+    .cursor.hov { width: 5px; height: 5px; }
+    .cursor-ring.hov { width: 56px; height: 56px; opacity: 1; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 26px 64px;
+    }
+    nav::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(8,11,8,.92) 0%, transparent 100%);
+      pointer-events: none; z-index: -1;
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 600; font-size: 1.5rem;
+      letter-spacing: 0.04em; position: relative;
+    }
+    .nav-logo .dot { color: var(--sage); }
+    .nav-links { display: flex; gap: 40px; list-style: none; }
+    .nav-links a {
+      color: var(--white); text-decoration: none;
+      font-size: .78rem; letter-spacing: .1em;
+      text-transform: uppercase; opacity: .5;
+      transition: opacity .2s;
+    }
+    .nav-links a:hover { opacity: 1; }
+    .nav-cta {
+      background: transparent !important;
+      border: 1px solid rgba(200,224,154,.4) !important;
+      color: var(--sage) !important;
+      padding: 9px 22px; border-radius: 40px;
+      opacity: 1 !important;
+      transition: border-color .2s, background .2s !important;
+    }
+    .nav-cta:hover { background: rgba(200,224,154,.08) !important; border-color: var(--sage) !important; }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 0 64px 90px;
+      position: relative; overflow: hidden;
+    }
+    /* deep botanical glow */
+    .hero-bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 70% 55% at 65% 35%, rgba(80,120,30,.28) 0%, transparent 65%),
+        radial-gradient(ellipse 35% 35% at 15% 75%, rgba(40,70,15,.22) 0%, transparent 55%),
+        radial-gradient(ellipse 50% 40% at 85% 80%, rgba(20,40,10,.18) 0%, transparent 60%);
+    }
+
+    /* ── SVG WEB CANVAS ── */
+    #web-canvas {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      pointer-events: none; z-index: 1;
+    }
+
+    /* ── PETAL SHAPES ── */
+    .petal-cluster {
+      position: absolute; pointer-events: none;
+      opacity: 0.06; z-index: 1;
+    }
+
+    .hero-tag {
+      font-size: .72rem; letter-spacing: .22em;
+      text-transform: uppercase; color: var(--sage);
+      margin-bottom: 24px; position: relative; z-index: 2;
+      display: flex; align-items: center; gap: 14px;
+      opacity: 0; animation: fadeUp .8s ease .3s forwards;
+    }
+    .hero-tag::before { content: ''; width: 28px; height: 1px; background: var(--sage); }
+
+    .hero-headline {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 600;
+      font-size: clamp(3.8rem, 9.5vw, 9.5rem);
+      line-height: .92; letter-spacing: -.01em;
+      position: relative; z-index: 2;
+    }
+    .hero-headline .line {
+      display: block; opacity: 0; transform: translateY(55px);
+      animation: slideUp .9s cubic-bezier(.16,1,.3,1) forwards;
+    }
+    .hero-headline .line:nth-child(1) { animation-delay: .45s; }
+    .hero-headline .line:nth-child(2) { animation-delay: .6s; font-style: italic; color: var(--sage); }
+    .hero-headline .line:nth-child(3) { animation-delay: .75s; }
+
+    .hero-sub {
+      max-width: 420px; font-size: 1.05rem; line-height: 1.75;
+      color: var(--text-dim); margin-top: 32px;
+      position: relative; z-index: 2;
+      opacity: 0; animation: fadeUp .8s ease 1.05s forwards;
+    }
+    .hero-actions {
+      display: flex; align-items: center; gap: 28px; margin-top: 44px;
+      position: relative; z-index: 2;
+      opacity: 0; animation: fadeUp .8s ease 1.25s forwards;
+    }
+    .btn-primary {
+      background: var(--bloom); color: var(--black);
+      padding: 15px 34px;
+      font-family: 'Syne', sans-serif; font-weight: 700;
+      font-size: .85rem; letter-spacing: .06em;
+      text-decoration: none; border-radius: 40px;
+      transition: background .2s, transform .2s; display: inline-block;
+    }
+    .btn-primary:hover { background: var(--bloom-d); transform: translateY(-2px); }
+    .btn-ghost {
+      color: var(--white); text-decoration: none;
+      font-size: .78rem; letter-spacing: .12em;
+      text-transform: uppercase; opacity: .45;
+      transition: opacity .2s; display: flex; align-items: center; gap: 8px;
+    }
+    .btn-ghost:hover { opacity: 1; }
+    .btn-ghost::after { content: '↓'; }
+
+    .hero-scroll {
+      position: absolute; right: 64px; bottom: 90px;
+      writing-mode: vertical-rl; font-size: .65rem;
+      letter-spacing: .2em; text-transform: uppercase;
+      opacity: .25; display: flex; align-items: center; gap: 14px; z-index: 2;
+    }
+    .hero-scroll::after { content: ''; width: 1px; height: 50px; background: var(--white); opacity: .3; }
+
+    /* organic section divider */
+    .divider-wave {
+      width: 100%; overflow: hidden; line-height: 0;
+      background: var(--black);
+    }
+    .divider-wave svg { display: block; width: 100%; }
+
+    /* ── SECTION BASE ── */
+    section { padding: 120px 64px; }
+    .section-label {
+      font-size: .68rem; letter-spacing: .26em;
+      text-transform: uppercase; color: var(--sage);
+      display: flex; align-items: center; gap: 12px; margin-bottom: 56px;
+    }
+    .section-label::before { content: ''; width: 22px; height: 1px; background: var(--sage); }
+
+    /* ── SERVICES ── */
+    #services { background: var(--deep); position: relative; overflow: hidden; }
+
+    /* subtle web pattern in services bg */
+    #services::before {
+      content: '';
+      position: absolute; top: -80px; right: -80px;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(200,224,154,.03) 0%, transparent 70%);
+      border-radius: 50%;
+      box-shadow:
+        0 0 0 40px rgba(200,224,154,.015),
+        0 0 0 80px rgba(200,224,154,.01),
+        0 0 0 120px rgba(200,224,154,.007),
+        0 0 0 180px rgba(200,224,154,.004);
+      pointer-events: none;
+    }
+
+    .services-header {
+      display: flex; justify-content: space-between; align-items: flex-end;
+      margin-bottom: 72px; flex-wrap: wrap; gap: 28px;
+    }
+    .services-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 600; font-size: clamp(2.4rem, 4.5vw, 4.2rem);
+      line-height: 1.0; letter-spacing: -.01em; max-width: 500px;
+    }
+    .services-title em { font-style: italic; color: var(--text-dim); }
+    .services-desc {
+      max-width: 280px; font-size: .9rem; line-height: 1.85; color: var(--text-dim);
+    }
+    .services-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; }
+    .service-card {
+      background: var(--mid); padding: 44px 36px;
+      position: relative; overflow: hidden; transition: background .3s;
+    }
+    /* petal corner accent */
+    .service-card::after {
+      content: '';
+      position: absolute; top: -30px; right: -30px;
+      width: 80px; height: 80px;
+      border-radius: 0 0 0 100%;
+      border-left: 1px solid rgba(200,224,154,.1);
+      border-bottom: 1px solid rgba(200,224,154,.1);
+      transition: border-color .3s, transform .4s;
+    }
+    .service-card:hover::after { border-color: rgba(200,224,154,.3); transform: scale(1.3); }
+    .service-card::before {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+      height: 1px; background: var(--bloom);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform .45s cubic-bezier(.16,1,.3,1);
+    }
+    .service-card:hover::before { transform: scaleX(1); }
+    .service-card:hover { background: #111811; }
+    .service-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: .68rem; letter-spacing: .18em;
+      color: var(--sage); margin-bottom: 24px; opacity: .6;
+    }
+    .service-icon { font-size: 1.8rem; margin-bottom: 18px; display: block; }
+    .service-name {
+      font-family: 'Syne', sans-serif; font-weight: 700;
+      font-size: 1.25rem; letter-spacing: -.01em; margin-bottom: 14px;
+    }
+    .service-text { font-size: .88rem; line-height: 1.85; color: var(--text-dim); }
+
+    /* ── PORTFOLIO ── */
+    #portfolio { background: var(--black); position: relative; }
+
+    /* faint radial rings like a web anchor point */
+    #portfolio::after {
+      content: '';
+      position: absolute; bottom: 60px; left: 60px;
+      width: 300px; height: 300px;
+      border-radius: 50%;
+      box-shadow:
+        0 0 0 1px rgba(200,224,154,.04),
+        0 0 0 30px rgba(200,224,154,.025),
+        0 0 0 60px rgba(200,224,154,.015),
+        0 0 0 100px rgba(200,224,154,.007);
+      pointer-events: none;
+    }
+
+    .portfolio-header {
+      display: flex; justify-content: space-between; align-items: flex-end;
+      margin-bottom: 56px; flex-wrap: wrap; gap: 20px;
+    }
+    .portfolio-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 600; font-size: clamp(2.4rem, 4.5vw, 4.2rem);
+      line-height: 1; letter-spacing: -.01em;
+    }
+    .portfolio-note { font-size: .85rem; color: var(--text-dim); font-style: italic; max-width: 200px; line-height: 1.65; }
+    .portfolio-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto; gap: 14px;
+    }
+    .portfolio-item {
+      position: relative; overflow: hidden;
+      background: var(--mid); aspect-ratio: 4/3; border-radius: 6px;
+    }
+    .portfolio-item:first-child { grid-column: 1; grid-row: 1 / 3; aspect-ratio: auto; }
+    .portfolio-item-bg {
+      position: absolute; inset: 0;
+      background-size: cover; background-position: center;
+      transition: transform .6s cubic-bezier(.16,1,.3,1);
+    }
+    .portfolio-item:hover .portfolio-item-bg { transform: scale(1.04); }
+    .portfolio-item-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(8,11,8,.95) 0%, rgba(8,11,8,.05) 55%);
+      display: flex; flex-direction: column; justify-content: flex-end; padding: 32px;
+    }
+    /* silk thread corner on hover */
+    .portfolio-item::before {
+      content: '';
+      position: absolute; top: 0; right: 0;
+      width: 0; height: 0;
+      border-style: solid;
+      border-width: 0 48px 48px 0;
+      border-color: transparent rgba(200,224,154,.15) transparent transparent;
+      z-index: 3;
+      transition: border-width .3s;
+    }
+    .portfolio-item:hover::before { border-width: 0 64px 64px 0; border-color: transparent rgba(200,224,154,.25) transparent transparent; }
+    .portfolio-tag { font-size: .62rem; letter-spacing: .2em; text-transform: uppercase; color: var(--sage); margin-bottom: 7px; }
+    .portfolio-name { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 1.5rem; letter-spacing: -.01em; }
+    .portfolio-arrow {
+      position: absolute; top: 24px; right: 24px;
+      width: 38px; height: 38px;
+      border: 1px solid rgba(200,224,154,.25); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .85rem; opacity: 0;
+      transform: translate(6px, -6px);
+      transition: opacity .3s, transform .3s, border-color .3s;
+      z-index: 4; color: var(--sage);
+    }
+    .portfolio-item:hover .portfolio-arrow { opacity: 1; transform: translate(0,0); border-color: var(--sage); }
+    .p1 { background: linear-gradient(135deg, #162810 0%, #0d1b08 100%); }
+    .p2 { background: linear-gradient(135deg, #0e1e2a 0%, #080f14 100%); }
+    .p3 { background: linear-gradient(135deg, #1e180e 0%, #120e08 100%); }
+
+    /* ── CONTACT ── */
+    #contact {
+      background: var(--bloom);
+      color: var(--black);
+      position: relative; overflow: hidden;
+    }
+    /* ghost petal shapes in contact bg */
+    #contact::before {
+      content: '';
+      position: absolute; right: -100px; bottom: -100px;
+      width: 500px; height: 500px;
+      border-radius: 60% 40% 70% 30% / 50% 60% 40% 50%;
+      background: rgba(0,0,0,.06);
+      pointer-events: none;
+    }
+    #contact::after {
+      content: '';
+      position: absolute; left: -60px; top: -60px;
+      width: 300px; height: 300px;
+      border-radius: 30% 70% 50% 50% / 60% 40% 60% 40%;
+      background: rgba(0,0,0,.04);
+      pointer-events: none;
+    }
+    .contact-inner {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 80px; align-items: start; position: relative; z-index: 1;
+    }
+    .contact-left .section-label { color: rgba(10,20,10,.4); }
+    .contact-left .section-label::before { background: rgba(10,20,10,.4); }
+    .contact-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 600; font-size: clamp(2.8rem, 5vw, 5rem);
+      line-height: .95; letter-spacing: -.02em;
+    }
+    .contact-title em { font-style: italic; color: rgba(8,11,8,.55); }
+    .contact-sub { margin-top: 22px; font-size: .95rem; line-height: 1.75; color: rgba(8,11,8,.6); max-width: 340px; }
+    .contact-form { display: flex; flex-direction: column; gap: 14px; padding-top: 36px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group label { font-size: .65rem; letter-spacing: .16em; text-transform: uppercase; color: rgba(8,11,8,.45); }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      background: rgba(8,11,8,.07); border: 1px solid rgba(8,11,8,.14);
+      border-radius: 4px; padding: 13px 15px;
+      font-family: 'DM Sans', sans-serif; font-size: .9rem;
+      color: var(--black); outline: none;
+      transition: border-color .2s, background .2s; width: 100%;
+    }
+    .form-group input::placeholder, .form-group textarea::placeholder { color: rgba(8,11,8,.3); }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+      border-color: rgba(8,11,8,.4); background: rgba(8,11,8,.1);
+    }
+    .form-group textarea { resize: vertical; min-height: 110px; }
+    .form-group select { appearance: none; cursor: pointer; }
+    .btn-dark {
+      background: var(--black); color: var(--bloom);
+      border: none; padding: 16px 38px;
+      font-family: 'Syne', sans-serif; font-weight: 700;
+      font-size: .88rem; letter-spacing: .06em;
+      cursor: pointer; border-radius: 40px;
+      transition: background .2s, transform .2s; align-self: flex-start; margin-top: 6px;
+    }
+    .btn-dark:hover { background: #1a201a; transform: translateY(-2px); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--deep);
+      padding: 44px 64px;
+      display: flex; justify-content: space-between; align-items: center;
+      border-top: 1px solid rgba(200,224,154,.06);
+      flex-wrap: wrap; gap: 18px;
+    }
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 600; font-size: 1.2rem; letter-spacing: .04em;
+    }
+    .footer-logo .dot { color: var(--sage); }
+    .footer-copy { font-size: .75rem; color: var(--muted); }
+    .footer-links { display: flex; gap: 26px; }
+    .footer-links a { color: var(--muted); text-decoration: none; font-size: .75rem; transition: color .2s; }
+    .footer-links a:hover { color: var(--sage); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp { from { opacity:0; transform:translateY(18px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes slideUp { from { opacity:0; transform:translateY(55px); } to { opacity:1; transform:translateY(0); } }
+    .reveal { opacity:0; transform:translateY(36px); transition:opacity .85s cubic-bezier(.16,1,.3,1), transform .85s cubic-bezier(.16,1,.3,1); }
+    .reveal.visible { opacity:1; transform:translateY(0); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 860px) {
+      nav { padding: 22px 24px; }
+      .nav-links { display: none; }
+      section { padding: 80px 24px; }
+      #hero { padding: 0 24px 60px; }
+      .services-grid { grid-template-columns: 1fr; }
+      .portfolio-grid { grid-template-columns: 1fr; }
+      .portfolio-item:first-child { grid-row: auto; }
+      .contact-inner { grid-template-columns: 1fr; gap: 36px; }
+      .form-row { grid-template-columns: 1fr; }
+      footer { padding: 32px 24px; flex-direction: column; align-items: flex-start; }
+      .hero-scroll { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="cursor" id="cursor" aria-hidden="true"></div>
+<div class="cursor-ring" id="cursorRing" aria-hidden="true"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Web<span class="dot">·</span>Bloom</div>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#portfolio">Work</a></li>
+    <li><a href="#contact" class="nav-cta">Get a Quote</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+
+  <!-- Animated SVG spider web -->
+  <svg id="web-canvas" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+    <defs>
+      <radialGradient id="webFade" cx="68%" cy="30%" r="55%">
+        <stop offset="0%" stop-color="rgba(200,224,154,0.18)"/>
+        <stop offset="60%" stop-color="rgba(200,224,154,0.05)"/>
+        <stop offset="100%" stop-color="rgba(200,224,154,0)"/>
+      </radialGradient>
+      <!-- petal clip path shapes -->
+      <clipPath id="petalClip"><ellipse cx="50" cy="50" rx="18" ry="38" /></clipPath>
+    </defs>
+    <!-- web anchor at ~68%, 28% of viewport -->
+    <!-- radial spokes -->
+    <g id="web-spokes" stroke="url(#webFade)" stroke-width="0.5" fill="none" opacity="0.7">
+      <line x1="979" y1="252" x2="1440" y2="0"/>
+      <line x1="979" y1="252" x2="1280" y2="0"/>
+      <line x1="979" y1="252" x2="1100" y2="0"/>
+      <line x1="979" y1="252" x2="980" y2="0"/>
+      <line x1="979" y1="252" x2="840" y2="0"/>
+      <line x1="979" y1="252" x2="700" y2="0"/>
+      <line x1="979" y1="252" x2="560" y2="0"/>
+      <line x1="979" y1="252" x2="1440" y2="140"/>
+      <line x1="979" y1="252" x2="1440" y2="320"/>
+      <line x1="979" y1="252" x2="1440" y2="520"/>
+      <line x1="979" y1="252" x2="1440" y2="720"/>
+      <line x1="979" y1="252" x2="1200" y2="900"/>
+      <line x1="979" y1="252" x2="980" y2="900"/>
+      <line x1="979" y1="252" x2="700" y2="700"/>
+      <line x1="979" y1="252" x2="480" y2="500"/>
+    </g>
+    <!-- concentric silk rings (approximated as ellipses) -->
+    <g stroke="rgba(200,224,154,0.07)" stroke-width="0.8" fill="none">
+      <ellipse cx="979" cy="252" rx="120" ry="80"/>
+      <ellipse cx="979" cy="252" rx="240" ry="160"/>
+      <ellipse cx="979" cy="252" rx="380" ry="250"/>
+      <ellipse cx="979" cy="252" rx="540" ry="360"/>
+      <ellipse cx="979" cy="252" rx="720" ry="480"/>
+    </g>
+    <!-- dew drops at some intersections -->
+    <g fill="rgba(200,224,154,0.2)">
+      <circle cx="979" cy="172" r="2"/>
+      <circle cx="979" cy="92" r="1.5"/>
+      <circle cx="1099" cy="220" r="1.8"/>
+      <circle cx="1219" cy="185" r="1.4"/>
+      <circle cx="1060" cy="144" r="1.2"/>
+      <circle cx="900" cy="210" r="1.6"/>
+      <circle cx="840" cy="170" r="1.3"/>
+    </g>
+    <!-- loose botanical petal hints: thin elongated arcs scattered -->
+    <g stroke="rgba(200,224,154,0.05)" stroke-width="1" fill="none">
+      <path d="M200 800 Q230 740 260 800 Q230 860 200 800 Z"/>
+      <path d="M180 800 Q230 750 280 800 Q230 850 180 800 Z"/>
+      <path d="M1300 750 Q1330 690 1360 750 Q1330 810 1300 750 Z"/>
+      <path d="M1280 750 Q1330 700 1380 750 Q1330 800 1280 750 Z"/>
+    </g>
+  </svg>
+
+  <div class="hero-tag">Web Design &amp; Development Studio</div>
+  <!-- Visually hidden but crawlable context for search engines -->
+  <p class="sr-only">Web Bloom offers professional website design, development, and hosting services for businesses.</p>
+  <h1 class="hero-headline">
+    <span class="line">Your website</span>
+    <span class="line">should bloom,</span>
+    <span class="line">not blend in.</span>
+  </h1>
+  <p class="hero-sub">We build, design, and host websites that turn heads and drive results — crafted specifically for your brand.</p>
+  <div class="hero-actions">
+    <a href="#contact" class="btn-primary">Start a Project</a>
+    <a href="#portfolio" class="btn-ghost">See Our Work</a>
+  </div>
+  <div class="hero-scroll">Scroll to explore</div>
+</section>
+
+<!-- organic wave divider -->
+<div class="divider-wave">
+  <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" height="60">
+    <path d="M0,30 C200,60 400,0 600,30 C800,60 1000,5 1200,28 C1320,42 1400,22 1440,30 L1440,60 L0,60 Z" fill="#0e130e"/>
+  </svg>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-label">What We Do</div>
+  <div class="services-header">
+    <h2 class="services-title">Everything your<br /><em>web presence</em><br />needs.</h2>
+    <p class="services-desc">From concept to launch to ongoing care — we handle it all so you don't have to.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <div class="service-num">01</div>
+      <span class="service-icon">✦</span>
+      <div class="service-name">Web Design</div>
+      <p class="service-text">Custom, scroll-stopping designs built around your brand identity. No templates, no shortcuts — just intentional work that leaves an impression.</p>
+    </div>
+    <div class="service-card reveal" style="transition-delay:.1s">
+      <div class="service-num">02</div>
+      <span class="service-icon">⌨</span>
+      <div class="service-name">Web Development</div>
+      <p class="service-text">Clean, performant code that works beautifully on every device. Built for speed, accessibility, and seamless user experience.</p>
+    </div>
+    <div class="service-card reveal" style="transition-delay:.2s">
+      <div class="service-num">03</div>
+      <span class="service-icon">◈</span>
+      <div class="service-name">Hosting &amp; Maintenance</div>
+      <p class="service-text">Reliable hosting with ongoing support, updates, and edits. Your site stays fast, secure, and up-to-date — we've got you covered.</p>
+    </div>
+  </div>
+</section>
+
+<!-- organic wave divider 2 -->
+<div style="background:#0e130e; line-height:0;">
+  <svg viewBox="0 0 1440 50" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" height="50" style="display:block;width:100%;">
+    <path d="M0,25 C300,50 500,0 720,25 C940,50 1200,10 1440,25 L1440,50 L0,50 Z" fill="#080b08"/>
+  </svg>
+</div>
+
+<!-- PORTFOLIO -->
+<section id="portfolio">
+  <div class="portfolio-header">
+    <div>
+      <div class="section-label">Our Work</div>
+      <h2 class="portfolio-title">Built to<br />impress.</h2>
+    </div>
+    <p class="portfolio-note reveal">A selection of sites we've designed, built, and launched for our clients.</p>
+  </div>
+  <div class="portfolio-grid">
+    <div class="portfolio-item reveal">
+      <div class="portfolio-item-bg p1"></div>
+      <div class="portfolio-item-overlay">
+        <div class="portfolio-tag">E-Commerce · Design + Dev</div>
+        <div class="portfolio-name">Verdant Goods Co.</div>
+      </div>
+      <div class="portfolio-arrow">↗</div>
+    </div>
+    <div class="portfolio-item reveal" style="transition-delay:.1s">
+      <div class="portfolio-item-bg p2"></div>
+      <div class="portfolio-item-overlay">
+        <div class="portfolio-tag">Local Business · Full Build</div>
+        <div class="portfolio-name">Maplewood Studio</div>
+      </div>
+      <div class="portfolio-arrow">↗</div>
+    </div>
+    <div class="portfolio-item reveal" style="transition-delay:.2s">
+      <div class="portfolio-item-bg p3"></div>
+      <div class="portfolio-item-overlay">
+        <div class="portfolio-tag">Portfolio · Design Only</div>
+        <div class="portfolio-name">Celeste Mora Creative</div>
+      </div>
+      <div class="portfolio-arrow">↗</div>
+    </div>
+  </div>
+</section>
+
+<!-- organic wave into contact -->
+<div style="background:#080b08; line-height:0;">
+  <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" height="60" style="display:block;width:100%;">
+    <path d="M0,0 C360,60 720,0 1080,40 C1260,60 1380,20 1440,0 L1440,60 L0,60 Z" fill="#a8d47a"/>
+  </svg>
+</div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="contact-left">
+      <div class="section-label">Get In Touch</div>
+      <h2 class="contact-title">Let's build<br /><em>something</em><br />great.</h2>
+      <p class="contact-sub">Tell us about your project and we'll get back to you within 24 hours with a free consultation.</p>
+    </div>
+    <div class="contact-form reveal">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="name">Your Name</label>
+          <input id="name" type="text" placeholder="Jane Smith" />
+        </div>
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input id="email" type="email" placeholder="jane@company.com" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="company">Company / Business Name</label>
+        <input id="company" type="text" placeholder="Your Company Inc." />
+      </div>
+      <div class="form-group">
+        <label for="service">What do you need?</label>
+        <select id="service">
+          <option value="" disabled selected>Select a service...</option>
+          <option>Website Design</option>
+          <option>Website Development</option>
+          <option>Design + Development</option>
+          <option>Hosting &amp; Maintenance</option>
+          <option>Full Package (Design, Dev + Hosting)</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="message">Tell us about your project</label>
+        <textarea id="message" placeholder="Share any details about your vision, timeline, budget, or goals…"></textarea>
+      </div>
+      <button class="btn-dark">Send Message →</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Web<span class="dot">·</span>Bloom</div>
+  <div class="footer-copy">© 2026 Web Bloom. All rights reserved.</div>
+  <div class="footer-links">
+    <a href="#hero">Home</a>
+    <a href="#services">Services</a>
+    <a href="#portfolio">Work</a>
+    <a href="#contact">Contact</a>
+  </div>
+</footer>
+
+<script>
+  // Cursor
+  const cur = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+  (function tick(){
+    cur.style.left=mx+'px'; cur.style.top=my+'px';
+    rx+=(mx-rx)*.1; ry+=(my-ry)*.1;
+    ring.style.left=rx+'px'; ring.style.top=ry+'px';
+    requestAnimationFrame(tick);
+  })();
+  document.querySelectorAll('a,button,.service-card,.portfolio-item').forEach(el=>{
+    el.addEventListener('mouseenter',()=>{cur.classList.add('hov');ring.classList.add('hov');});
+    el.addEventListener('mouseleave',()=>{cur.classList.remove('hov');ring.classList.remove('hov');});
+  });
+
+  // Scroll reveal
+  const obs = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
+  },{threshold:.1});
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+  // Subtle web breathing animation
+  const spokes = document.getElementById('web-spokes');
+  let t = 0;
+  (function breathe(){
+    t += 0.008;
+    const s = 1 + Math.sin(t) * 0.012;
+    spokes.style.transform = `scale(${s})`;
+    spokes.style.transformOrigin = '979px 252px';
+    requestAnimationFrame(breathe);
+  })();
+</script>
+</body>
+</html>
