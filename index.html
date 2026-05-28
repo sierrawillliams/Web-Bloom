@@ -69,9 +69,9 @@
       --paper:     #ede5d5;
       --ink:       #1c1a17;
       --ink-soft:  #3d3a34;
-      --clay:      #c4522a;
-      --clay-d:    #a3431f;
-      --clay-l:    #e8a080;
+      --primary:      #d35f8d;
+      --primary-d:    #b94d78;
+      --primary-l:    #d7a7bf;
       --sage:      #6b8c6e;
       --text-dim:  rgba(28,26,23,0.45);
       --border:    rgba(28,26,23,0.1);
@@ -97,14 +97,14 @@
     /* ── CURSOR ── */
     .cursor {
       position: fixed; width: 10px; height: 10px;
-      background: var(--clay); border-radius: 50%;
+      background: var(--primary); border-radius: 50%;
       pointer-events: none; z-index: 9999;
       transform: translate(-50%,-50%);
       transition: width .2s, height .2s, background .2s;
     }
     .cursor-ring {
       position: fixed; width: 32px; height: 32px;
-      border: 1.5px solid rgba(196,82,42,0.4); border-radius: 50%;
+      border: 1.5px solid rgba(211,95,141,0.4); border-radius: 50%;
       pointer-events: none; z-index: 9998;
       transform: translate(-50%,-50%);
       transition: width .3s, height .3s, opacity .3s;
@@ -135,7 +135,7 @@
       letter-spacing: -0.01em; color: var(--ink);
       text-transform: none;
     }
-    .nav-logo-text span { color: var(--clay); }
+    .nav-logo-text span { color: var(--primary); }
     .nav-links { display: flex; gap: 36px; list-style: none; align-items: center; }
     .nav-links a {
       color: var(--ink-soft); text-decoration: none;
@@ -145,14 +145,14 @@
     }
     .nav-links a:hover { opacity: 1; }
     .nav-cta {
-      background: var(--clay) !important;
+      background: var(--primary) !important;
       color: #fff !important; border: none !important;
       padding: 10px 22px; border-radius: 4px;
       opacity: 1 !important; font-weight: 500 !important;
       letter-spacing: .04em !important;
       transition: background .2s !important;
     }
-    .nav-cta:hover { background: var(--clay-d) !important; }
+    .nav-cta:hover { background: var(--primary-d) !important; }
 
     /* ── HERO ── */
     #hero {
@@ -169,7 +169,7 @@
       content: '';
       position: absolute; inset: 0;
       background:
-        radial-gradient(ellipse 60% 50% at 80% 40%, rgba(196,82,42,.06) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 80% 40%, rgba(211,95,141,.06) 0%, transparent 60%),
         radial-gradient(ellipse 40% 40% at 10% 80%, rgba(107,140,110,.05) 0%, transparent 55%);
       pointer-events: none;
     }
@@ -177,18 +177,18 @@
     .hero-left { position: relative; z-index: 2; }
     .hero-right {
       position: relative; z-index: 2;
-      display: flex; justify-content: flex-end; align-items: center;
+      display: flex; justify-content: center; align-items: center;
     }
     .hero-graphic { width: 100%; max-width: 500px; aspect-ratio: 1; }
-    .hero-graphic svg { width: 100%; height: 100%; }
+    .hero-graphic img { width: 100%; height: 100%; }
 
     .hero-eyebrow {
       display: inline-flex; align-items: center; gap: 10px;
       font-size: .7rem; letter-spacing: .22em; text-transform: uppercase;
-      color: var(--clay); font-weight: 500; margin-bottom: 28px;
+      color: var(--primary); font-weight: 500; margin-bottom: 28px;
       opacity: 0; animation: fadeUp .7s ease .2s forwards;
     }
-    .hero-eyebrow::before { content: ''; width: 22px; height: 1.5px; background: var(--clay); }
+    .hero-eyebrow::before { content: ''; width: 22px; height: 1.5px; background: var(--primary); }
 
     h1.hero-headline {
       font-family: 'Montserrat', serif;
@@ -201,7 +201,7 @@
       animation: slideUp .85s cubic-bezier(.16,1,.3,1) forwards;
     }
     h1.hero-headline .line:nth-child(1) { animation-delay: .35s; }
-    h1.hero-headline .line:nth-child(2) { animation-delay: .5s; font-style: italic; color: var(--clay); }
+    h1.hero-headline .line:nth-child(2) { animation-delay: .5s; font-style: italic; color: var(--primary); }
     h1.hero-headline .line:nth-child(3) { animation-delay: .65s; }
 
     .hero-sub {
@@ -214,13 +214,13 @@
       opacity: 0; animation: fadeUp .7s ease 1.1s forwards;
     }
     .btn-primary {
-      background: var(--clay); color: #fff;
+      background: var(--primary); color: #fff;
       padding: 15px 32px; font-weight: 500;
       font-size: .88rem; letter-spacing: .05em;
       text-decoration: none; border-radius: 4px;
       transition: background .2s, transform .2s; display: inline-block;
     }
-    .btn-primary:hover { background: var(--clay-d); transform: translateY(-2px); }
+    .btn-primary:hover { background: var(--primary-d); transform: translateY(-2px); }
     .btn-ghost {
       color: var(--ink-soft); text-decoration: none;
       font-size: .78rem; letter-spacing: .1em;
@@ -244,7 +244,7 @@
 
     /* ── MARQUEE ── */
     .marquee-strip {
-      background: var(--clay); color: #fff;
+      background: var(--primary); color: #fff;
       overflow: hidden; padding: 13px 0; white-space: nowrap;
     }
     .marquee-inner {
@@ -262,11 +262,11 @@
     section { padding: 110px 64px; }
     .section-label {
       font-size: .66rem; letter-spacing: .26em;
-      text-transform: uppercase; color: var(--clay);
+      text-transform: uppercase; color: var(--primary);
       display: flex; align-items: center; gap: 12px;
       margin-bottom: 52px; font-weight: 500;
     }
-    .section-label::before { content: ''; width: 20px; height: 1.5px; background: var(--clay); }
+    .section-label::before { content: ''; width: 20px; height: 1.5px; background: var(--primary); }
 
     /* ── SERVICES ── */
     #services { background: var(--warm); }
@@ -279,7 +279,7 @@
       line-height: 1.1; letter-spacing: -.02em; color: var(--ink);
       position: sticky; top: 110px;
     }
-    .services-left h2 em { font-style: italic; color: var(--clay); }
+    .services-left h2 em { font-style: italic; color: var(--primary); }
     .services-left p {
       margin-top: 18px; font-size: .9rem; line-height: 1.85;
       color: var(--text-dim); max-width: 240px;
@@ -296,7 +296,7 @@
     .service-row:hover { padding-left: 10px; }
     .service-row-num {
       font-family: 'Montserrat', serif;
-      font-size: .72rem; color: var(--clay);
+      font-size: .72rem; color: var(--primary);
       letter-spacing: .1em; padding-top: 5px;
     }
     .service-row-body h3 {
@@ -305,7 +305,7 @@
       letter-spacing: -.01em; color: var(--ink); margin-bottom: 10px;
     }
     .service-row-body p { font-size: .88rem; line-height: 1.85; color: var(--text-dim); max-width: 380px; }
-    .service-row-icon { font-size: 1.2rem; color: var(--clay); opacity: .5; padding-top: 4px; text-align: right; }
+    .service-row-icon { font-size: 1.2rem; color: var(--primary); opacity: .5; padding-top: 4px; text-align: right; }
 
     /* ── PORTFOLIO ── */
     #portfolio { background: var(--cream); }
@@ -318,7 +318,7 @@
       font-weight: 700; font-size: clamp(2.2rem, 3.5vw, 3.5rem);
       letter-spacing: -.02em; line-height: 1.1; color: var(--ink);
     }
-    .portfolio-title em { font-style: italic; color: var(--clay); }
+    .portfolio-title em { font-style: italic; color: var(--primary); }
     .portfolio-note { font-size: .85rem; color: var(--text-dim); max-width: 200px; line-height: 1.65; }
     .portfolio-grid {
       display: grid; grid-template-columns: repeat(3,1fr); gap: 18px;
@@ -343,7 +343,7 @@
     }
     .portfolio-tag {
       font-size: .6rem; letter-spacing: .2em; text-transform: uppercase;
-      color: var(--clay-l); margin-bottom: 6px; font-weight: 500;
+      color: var(--primary-l); margin-bottom: 6px; font-weight: 500;
     }
     .portfolio-name {
       font-family: 'Montserrat', serif; font-weight: 700;
@@ -362,7 +362,7 @@
     }
     .portfolio-item:hover .portfolio-arrow {
       opacity: 1; transform: translate(0,0);
-      background: var(--clay); border-color: transparent;
+      background: var(--primary); border-color: transparent;
     }
     /* real screenshot backgrounds — swap these for actual screenshots */
     .p1 { background: linear-gradient(135deg, #c8a882 0%, #a88660 100%); }
@@ -375,14 +375,14 @@
       display: grid; grid-template-columns: 1fr 1fr;
       gap: 80px; align-items: start;
     }
-    .contact-left .section-label { color: var(--clay-l); }
-    .contact-left .section-label::before { background: var(--clay-l); }
+    .contact-left .section-label { color: var(--primary-l); }
+    .contact-left .section-label::before { background: var(--primary-l); }
     .contact-title {
       font-family: 'Montserrat', serif;
       font-weight: 700; font-size: clamp(2.4rem, 4vw, 4rem);
       line-height: 1.05; letter-spacing: -.02em; color: var(--cream);
     }
-    .contact-title em { font-style: italic; color: var(--clay-l); }
+    .contact-title em { font-style: italic; color: var(--primary-l); }
     .contact-sub {
       margin-top: 22px; font-size: .95rem; line-height: 1.8;
       color: rgba(250,247,242,.5); max-width: 320px;
@@ -393,8 +393,8 @@
       font-size: .88rem; transition: color .2s;
       display: flex; align-items: center; gap: 10px;
     }
-    .contact-detail a:hover { color: var(--clay-l); }
-    .contact-detail a::before { content: '→'; color: var(--clay-l); font-size: .78rem; }
+    .contact-detail a:hover { color: var(--primary-l); }
+    .contact-detail a::before { content: '→'; color: var(--primary-l); font-size: .78rem; }
     .contact-form { display: flex; flex-direction: column; gap: 14px; }
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
     .form-group { display: flex; flex-direction: column; gap: 6px; }
@@ -419,7 +419,7 @@
     .form-group select { appearance: none; cursor: pointer; }
     .form-group select option { background: #2a2820; }
     .btn-submit {
-      background: var(--clay); color: #fff;
+      background: var(--primary); color: #fff;
       border: none; padding: 15px 36px;
       font-family: 'Inter', sans-serif; font-weight: 500;
       font-size: .88rem; letter-spacing: .06em;
@@ -427,7 +427,7 @@
       transition: background .2s, transform .2s;
       align-self: flex-start; margin-top: 6px;
     }
-    .btn-submit:hover { background: var(--clay-d); transform: translateY(-2px); }
+    .btn-submit:hover { background: var(--primary-d); transform: translateY(-2px); }
     .btn-submit:disabled { opacity: .55; cursor: not-allowed; transform: none; }
     #form-status {
       font-size: .85rem; margin-top: 4px; min-height: 1.2em;
@@ -448,14 +448,14 @@
       font-family: 'Montserrat', serif;
       font-weight: 700; font-size: 1.1rem; color: var(--cream);
     }
-    .footer-logo-text span { color: var(--clay-l); }
+    .footer-logo-text span { color: var(--primary-l); }
     .footer-copy { font-size: .74rem; color: rgba(250,247,242,.28); }
     .footer-links { display: flex; gap: 24px; }
     .footer-links a {
       color: rgba(250,247,242,.28); text-decoration: none;
       font-size: .74rem; transition: color .2s;
     }
-    .footer-links a:hover { color: var(--clay-l); }
+    .footer-links a:hover { color: var(--primary-l); }
 
     /* ── ANIMATIONS ── */
     @keyframes fadeUp { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
@@ -532,70 +532,7 @@
   </div>
   <div class="hero-right">
     <div class="hero-graphic">
-      <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
-        <defs>
-          <radialGradient id="bgGrad" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stop-color="#ede5d5"/>
-            <stop offset="100%" stop-color="#e2d6c0"/>
-          </radialGradient>
-          <radialGradient id="webGrad" cx="50%" cy="40%" r="55%">
-            <stop offset="0%" stop-color="rgba(196,82,42,0.4)"/>
-            <stop offset="65%" stop-color="rgba(196,82,42,0.06)"/>
-            <stop offset="100%" stop-color="rgba(196,82,42,0)"/>
-          </radialGradient>
-        </defs>
-        <!-- bg circle -->
-        <circle cx="250" cy="250" r="240" fill="url(#bgGrad)"/>
-        <!-- petal shapes — organic, barely-there -->
-        <ellipse cx="250" cy="130" rx="26" ry="52" fill="rgba(196,82,42,0.07)" transform="rotate(0 250 250)"/>
-        <ellipse cx="250" cy="130" rx="26" ry="52" fill="rgba(196,82,42,0.06)" transform="rotate(45 250 250)"/>
-        <ellipse cx="250" cy="130" rx="26" ry="52" fill="rgba(196,82,42,0.06)" transform="rotate(90 250 250)"/>
-        <ellipse cx="250" cy="130" rx="26" ry="52" fill="rgba(196,82,42,0.055)" transform="rotate(135 250 250)"/>
-        <ellipse cx="250" cy="130" rx="26" ry="52" fill="rgba(196,82,42,0.05)" transform="rotate(180 250 250)"/>
-        <ellipse cx="250" cy="130" rx="26" ry="52" fill="rgba(196,82,42,0.05)" transform="rotate(225 250 250)"/>
-        <ellipse cx="250" cy="130" rx="26" ry="52" fill="rgba(196,82,42,0.045)" transform="rotate(270 250 250)"/>
-        <ellipse cx="250" cy="130" rx="26" ry="52" fill="rgba(196,82,42,0.045)" transform="rotate(315 250 250)"/>
-        <!-- web spokes -->
-        <g stroke="url(#webGrad)" stroke-width="0.7" fill="none" opacity="0.9">
-          <line x1="250" y1="250" x2="250" y2="30"/>
-          <line x1="250" y1="250" x2="406" y2="94"/>
-          <line x1="250" y1="250" x2="470" y2="250"/>
-          <line x1="250" y1="250" x2="406" y2="406"/>
-          <line x1="250" y1="250" x2="250" y2="470"/>
-          <line x1="250" y1="250" x2="94"  y2="406"/>
-          <line x1="250" y1="250" x2="30"  y2="250"/>
-          <line x1="250" y1="250" x2="94"  y2="94"/>
-          <line x1="250" y1="250" x2="332" y2="58"/>
-          <line x1="250" y1="250" x2="442" y2="168"/>
-          <line x1="250" y1="250" x2="442" y2="332"/>
-          <line x1="250" y1="250" x2="332" y2="442"/>
-          <line x1="250" y1="250" x2="168" y2="442"/>
-          <line x1="250" y1="250" x2="58"  y2="332"/>
-          <line x1="250" y1="250" x2="58"  y2="168"/>
-          <line x1="250" y1="250" x2="168" y2="58"/>
-        </g>
-        <!-- silk rings -->
-        <g stroke="rgba(196,82,42,0.13)" stroke-width="0.8" fill="none">
-          <circle cx="250" cy="250" r="52"/>
-          <circle cx="250" cy="250" r="104"/>
-          <circle cx="250" cy="250" r="156"/>
-          <circle cx="250" cy="250" r="208"/>
-        </g>
-        <!-- dew drops -->
-        <g fill="rgba(196,82,42,0.35)">
-          <circle cx="250" cy="198" r="2.5"/>
-          <circle cx="250" cy="146" r="2"/>
-          <circle cx="287" cy="213" r="2"/>
-          <circle cx="213" cy="213" r="1.8"/>
-          <circle cx="301" cy="177" r="1.6"/>
-          <circle cx="199" cy="177" r="1.6"/>
-          <circle cx="250" cy="94"  r="1.8"/>
-          <circle cx="322" cy="178" r="1.4"/>
-        </g>
-        <!-- centre -->
-        <circle cx="250" cy="250" r="6" fill="rgba(196,82,42,0.4)"/>
-        <circle cx="250" cy="250" r="3" fill="rgba(196,82,42,0.75)"/>
-      </svg>
+      <img src="images/WebBloom-Logo-notext.svg"/>
     </div>
   </div>
 </section>
